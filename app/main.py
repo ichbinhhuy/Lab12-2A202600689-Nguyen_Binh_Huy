@@ -9,6 +9,8 @@ from datetime import datetime, timezone
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, Security, Depends, Request, Response
+from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.security.api_key import APIKeyHeader
 from fastapi.middleware.cors import CORSMiddleware
 import redis
@@ -164,6 +166,12 @@ def create_app() -> FastAPI:
         except Exception as e:
             raise HTTPException(503, f"Redis not ready: {e}")
         return {"ready": True}
+
+    app.mount("/frontend", StaticFiles(directory="frontend"), name="frontend")
+
+    @app.get("/", response_class=HTMLResponse, tags=["UI"])
+    def read_index():
+        return FileResponse("index.html")
 
     app.include_router(health_router)
     app.include_router(seed_cafes_router)
