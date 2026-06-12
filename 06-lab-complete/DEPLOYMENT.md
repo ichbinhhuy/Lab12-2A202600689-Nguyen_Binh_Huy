@@ -1,7 +1,7 @@
 # Deployment Information
 
 ## Public URL
-https://day12-2a202600689-nguyenbinhhuy-production.up.railway.app
+https://lab12-2a202600689-nguyenbinhhuy-production.up.railway.app
 
 ## Platform
 Railway
@@ -10,19 +10,19 @@ Railway
 
 ### Health Check (Kiểm tra liveness)
 ```bash
-curl https://day12-2a202600689-nguyenbinhhuy-production.up.railway.app/health
+curl https://lab12-2a202600689-nguyenbinhhuy-production.up.railway.app/health
 # Expected: {"status": "ok", "uptime_seconds": ...}
 ```
 
 ### Readiness Check
 ```bash
-curl https://day12-2a202600689-nguyenbinhhuy-production.up.railway.app/ready
+curl https://lab12-2a202600689-nguyenbinhhuy-production.up.railway.app/ready
 # Expected: {"ready": true}
 ```
 
 ### API Test (với authentication)
 ```bash
-curl -X POST https://day12-2a202600689-nguyenbinhhuy-production.up.railway.app/ask \
+curl -X POST https://lab12-2a202600689-nguyenbinhhuy-production.up.railway.app/ask \
   -H "X-API-Key: my-secret-key-123" \
   -H "Content-Type: application/json" \
   -d '{"question": "Hello", "user_id": "test_user_01"}'
@@ -32,7 +32,7 @@ curl -X POST https://day12-2a202600689-nguyenbinhhuy-production.up.railway.app/a
 ```bash
 # Gửi 15 request liên tục, từ request thứ 11 sẽ bị chặn
 for i in $(seq 1 15); do
-  curl -s -X POST https://day12-2a202600689-nguyenbinhhuy-production.up.railway.app/ask \
+  curl -s -X POST https://lab12-2a202600689-nguyenbinhhuy-production.up.railway.app/ask \
     -H "X-API-Key: my-secret-key-123" \
     -H "Content-Type: application/json" \
     -d '{"question": "test"}'
